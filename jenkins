@@ -1,0 +1,31 @@
+@Library("nitinit_shared_library") _
+pipeline {
+    agent any
+    tools{
+        maven "maven-3.9.4"
+    }
+
+    stages {
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nitinnande/maven-web-app.git'
+            
+            }
+            
+        }
+        stage('maven Build') {
+            steps {
+                mavenBuild()
+            
+            }
+            
+        }
+        stage('soanrcode') {
+            steps {
+                sonarQube()
+            
+            }
+            
+        }
+    }
+}
